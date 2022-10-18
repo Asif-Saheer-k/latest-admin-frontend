@@ -319,9 +319,10 @@ function SingleOrderPage({ invoice }) {
           </thead>
           <tbody>
             {produts.map((items, index) => {
+    
               return (
                 <tr key={index}>
-                  <th>{index + 1}</th>
+                  <th>{items.ProductId}</th>
                   <td>
                     <img
                       src={items.image}

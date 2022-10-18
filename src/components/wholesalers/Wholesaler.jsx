@@ -80,7 +80,7 @@ function Alluser() {
             onClick={() => {
               editHandler(row._id, row.wallet);
             }}
-          />
+          /> 
         </>
       ),
     },
@@ -158,28 +158,29 @@ function Alluser() {
   const handleClick = async () => {
     console.log(amount);
     console.log(wholsealerEditId);
-    // try {
-    //   const config = {
-    //     headers: {
-    //       "Content-type": "application/json",
-    //       "auth-token": AdminDeatails.Token,
-    //     },
-    //   };
-    //   const { data } = await axios.post(
-    //     `/api/superAdmin/wholesaler/${id}`,
-    //     {},
-    //     config
-    //   );
-    //   setLoading(true);
-    //   setLoading(false);
-    //   console.log(data);
-    //   swal("success", {
-    //     icon: "success",
-    //   });
-    // } catch (eror) {
-    //   swal("OOPS!", "Somthing Went Wrong!", "error");
-    // }
-
+    const id = wholsealerEditId;
+    const amoun = amount;
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          "auth-token": AdminDeatails.Token,
+        },
+      };
+      const { data } = await axios.post(
+        "/api/superAdmin/update-wholsaler-wallet",
+        { amoun, id },
+        config
+      );
+      setLoading(true); 
+      setLoading(false);
+      handleClose();  
+      swal("success", { 
+        icon: "success",
+      });
+    } catch (eror) {
+      swal("OOPS!", "Somthing Went Wrong!", "error");
+    }
   };
 
   return (
