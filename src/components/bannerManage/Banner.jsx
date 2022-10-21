@@ -155,13 +155,12 @@ export default function FormPropsTextFields() {
       {
         cloudName: "dq06v1dnz",
         uploadPreset: "thepaaki",
-        cropping: 'true',
-        croppingCoordinatesMode: 'custom',
-        maxImageWidth:1920,
-        maxImageHeight:800,
-        minImageWidth:1920,
-        minImageHeight:800,
-      
+        cropping: "true",
+        croppingCoordinatesMode: "custom",
+        maxImageWidth: 1920,
+        maxImageHeight: 800,
+        minImageWidth: 1920,
+        minImageHeight: 800,
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
@@ -175,7 +174,6 @@ export default function FormPropsTextFields() {
       }
     );
 
-
     myWidget.open();
   };
 
@@ -187,93 +185,101 @@ export default function FormPropsTextFields() {
       onSubmit={handleSubmit(onSubmit)}
       sx={{
         "& .MuiTextField-root": { m: 1, width: "45ch" },
-        marginTop: "2%",
+        marginTop: "2%",overflow:"hidden"
       }}
       noValidate
       autoComplete="off"
     >
-      <h5 style={{marginLeft:"4%" }}>BANNER ADD SECTION</h5>
+      <div className="text-center ">
+        <h5 style={{ marginLeft: "4%" }}>BANNER ADD SECTION</h5>{" "}
+      </div>
       <div className="container ms-5">
         <div className="row">
           <div className="col-12">
-          <div className="col-md-6">
-            <TextField
-              required
-              id="outlined-uncontrolled"
-              label="Enter Offer Percentage"
-              defaultValue=""
-              {...register("offer", {
-                required: "Invalid Number",
-                pattern: {
-                  value: /^[0-9]*$/,
-                  message: "Invalid Number",
-                },
-              })}
-              onKeyUp={() => {
-                trigger("offer");
-              }}
-            />
-            {errors.offer && (
+            <div className="col-md-6">
+              <TextField
+                required
+                id="outlined-uncontrolled"
+                label="Enter Offer Percentage"
+                defaultValue=""
+                {...register("offer", {
+                  required: "Invalid Number",
+                  pattern: {
+                    value: /^[0-9]*$/,
+                    message: "Invalid Number",
+                  },
+                })}
+                onKeyUp={() => {
+                  trigger("offer");
+                }}
+              />
+              {errors.offer && (
+                <div>
+                  <small className="text-danger">{errors.offer.message}</small>
+                </div>
+              )}
+            </div>
+            <div className="col-md-6">
+              <TextField
+                required
+                id="outlined-uncontrolled"
+                label="Enter Product ID"
+                defaultValue=""
+                {...register("link", {
+                  required: "ID is required",
+                })}
+                onKeyUp={() => {
+                  trigger("link");
+                }}
+              />
               <div>
-                <small className="text-danger">{errors.offer.message}</small>
+                {errors.link && (
+                  <small className="text-danger">{errors.link.message}</small>
+                )}
               </div>
-            )}
-          </div>
-          <div className="col-md-6">
-            <TextField
-              required
-              id="outlined-uncontrolled"
-              label="Enter Product ID"
-              defaultValue=""
-              {...register("link", {
-                required: "ID is required",
-              })}
-              onKeyUp={() => {
-                trigger("link");
-              }}
-            />
-            <div>
-              {errors.link && (
-                <small className="text-danger">{errors.link.message}</small>
-              )}
             </div>
-          </div>
-          <div className="col-12">
-          <div className="col-md-4">
-            <i
-              onClick={Imageupload}
-              style={{ marginTop: "3%",width:"100%" }}
-              className="btn btn-primary ms-2"
-              variant="outlined"
-              color="primary"
-            >
-              ULOAD IMAGE
-            </i>
-          </div>
-          <div className="col-md-4 ">
-            <div>
-              {Image && (
-                <img src={Image} style={{ width: "200px", height: "150px" }} />
-              )}
+            <div className="col-12">
+              <div className="col-md-4">
+                <i
+                  onClick={Imageupload}
+                  style={{ marginTop: "3%", width: "100%" }}
+                  className="btn btn-primary ms-2"
+                  variant="outlined"
+                  color="primary"
+                >
+                  UPLOAD IMAGE
+                </i>
+              </div>
+              <div className="col-md-4 ">
+                <div>
+                  {Image && (
+                    <img
+                      src={Image}
+                      style={{ width: "200px", height: "150px" }}
+                    />
+                  )}
 
-              <button
-                style={{ marginTop: "5%" }}
-                type="submit"
-                className="btn btn-primary "
-                variant="outlined"
-                color="primary"
-              >
-                ADD
-              </button>
+                  <button
+                    style={{ marginTop: "5%" }}
+                    type="submit"
+                    className="btn btn-primary "
+                    variant="outlined"
+                    color="primary"
+                  >
+                    ADD
+                  </button>
+                </div>
+              </div>
             </div>
-            </div>
-          </div>
           </div>
         </div>
       </div>
-
-      <h4 style={{ marginTop: "5%",marginLeft:"4%" }}>ADMIN DEATAILS</h4>
-      <div className="container ms-5">
+      <div className="text-center">
+        <h4 style={{ marginTop: "5%", marginLeft: "4%", marginBottom: "4%" }}>
+          BANNER DEATAILS
+        </h4>
+      </div>
+      <div className="container ms-5 ">
         <div className="row col-lg-10">
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 100 }} aria-label="customized table">

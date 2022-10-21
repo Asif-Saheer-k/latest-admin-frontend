@@ -252,7 +252,7 @@ export default function FormPropsTextFields() {
               variant="outlined"
               color="primary"
             >
-              ULOAD IMAGE
+              UPLOAD IMAGE
             </i>
           </div>
           <div className="col-lg-4 col-md-6">

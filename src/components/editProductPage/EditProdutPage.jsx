@@ -481,7 +481,7 @@ export default function FormPropsTextFields() {
               <div className="col-lg-4 col-md-6">
                 <TextField
                   id="outlined-password-input"
-                  label="Enter Wholsaler Amount"
+                  label="Enter Wholesaler Amount"
                   {...register("wholsalerPrice", {
                     required: "Please enter wholsalerPrice",
                   })}
@@ -671,7 +671,7 @@ export default function FormPropsTextFields() {
                     variant="outlined"
                     color="primary"
                   >
-                    ULOAD PRODUCT IMAGE(min-3)
+                    UPLOAD PRODUCT IMAGE(min-3)
                   </i>
                 </FormControl>
               </div>
@@ -731,7 +731,7 @@ export default function FormPropsTextFields() {
                         variant="outlined"
                         color="primary"
                       >
-                        ULOAD IMAGE
+                        UPLOAD IMAGE
                       </i>
 
                       {image && (
