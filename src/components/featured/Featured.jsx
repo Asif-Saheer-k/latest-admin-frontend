@@ -26,7 +26,7 @@ const Featured = () => {
           "/api/superAdmin/view-total-amount",
           config
         );
-        const TotalAmount = data[0].Total;
+        const TotalAmount =parseInt(data[0].Total).toFixed(0);
        SetTotal(TotalAmount);
       } catch (error) {
         swal("OOPS!", "Somthing Went Wrong!", "error");

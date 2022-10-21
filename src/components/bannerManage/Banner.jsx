@@ -153,8 +153,8 @@ export default function FormPropsTextFields() {
   const Imageupload = () => {
     var myWidget = window.cloudinary.openUploadWidget(
       {
-        cloudName: "www-menscarts-shop",
-        uploadPreset: "dev_setups",
+        cloudName: "dq06v1dnz",
+        uploadPreset: "thepaaki",
         cropping: 'true',
         croppingCoordinatesMode: 'custom',
         maxImageWidth:1920,

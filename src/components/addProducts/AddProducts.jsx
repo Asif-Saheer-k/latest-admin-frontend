@@ -68,7 +68,14 @@ const names = [
   "purple",
   "powderblue",
 ];
-const tagsName = ["ladies", "jacket", "full sleve", "cloth", "sarie", "kurthi"];
+const tagsName = [
+  "ladies",
+  "jacket",
+  "full sleeve",
+  "cloth",
+  "sarie",
+  "kurthi",
+];
 
 const sizeChart = ["S", "M", "L", "XL", "XXL", "XXXL"];
 
@@ -110,8 +117,8 @@ const currencies = [
 ];
 const CategoryItems = [
   {
-    value: "Meternity outfits",
-    label: "Meternity outfits",
+    value: "Maternity outfits",
+    label: "Maternity outfits",
   },
   {
     value: "Casual Wears",
@@ -222,14 +229,8 @@ export default function FormPropsTextFields() {
     console.log(Tag);
     var myWidget = window.cloudinary.openUploadWidget(
       {
-        cloudName: "www-menscarts-shop",
-        uploadPreset: "dev_setups",
-        cropping: "true",
-        croppingCoordinatesMode: "custom",
-        maxImageWidth: 1920,
-        maxImageHeight: 800,
-        minImageWidth: 1920,
-        minImageHeight: 800,
+        cloudName: "dq06v1dnz",
+        uploadPreset: "thepaaki",
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
@@ -244,15 +245,8 @@ export default function FormPropsTextFields() {
   const PriductImageupload = () => {
     var myWidget = window.cloudinary.openUploadWidget(
       {
-        cloudName: "www-menscarts-shop",
-        uploadPreset: "dev_setups",
-        cropping: "true",
-        croppingCoordinatesMode: "custom",
-        maxImageWidth: 260,
-        maxImageHeight: 360,
-        minImageWidth: 260,
-        minImageHeight: 360,
-        maxImageFileSize: 2000000,
+        cloudName: "dq06v1dnz",
+        uploadPreset: "thepaaki",
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
@@ -268,8 +262,6 @@ export default function FormPropsTextFields() {
 
   //stock updation function with size adding included
   const onSubmit = (data) => {
-    console.log(data);
-    console.log("onsubmit");
     if (image) {
       if (data.M > 0) {
         stoke.push({
@@ -336,8 +328,6 @@ export default function FormPropsTextFields() {
         image: image,
         size: stoke,
       };
-
-      console.log(obj);
       varitaion.push(obj);
       setImage("");
       setStoke([]);
@@ -349,7 +339,7 @@ export default function FormPropsTextFields() {
   };
 
   const onProduct = async (datas) => {
-    if (productImages[3] && varitaion[0] && Tag[0]) {
+    if (productImages[1] && varitaion[0] && Tag[0]) {
       try {
         const config = {
           headers: {
@@ -367,7 +357,7 @@ export default function FormPropsTextFields() {
             wholesaler: parseInt(datas.wholsalerPrice),
             new: New,
             rating: parseInt(rating),
-            saleCount: 54,
+            saleCount: 10,
             tag: Tag,
             category: [Category],
             variation: varitaion,
@@ -403,17 +393,17 @@ export default function FormPropsTextFields() {
           component="form"
           onSubmit={handleSubmit(onProduct)}
           sx={{
-            "& .MuiTextField-root": { m: 1, width: "35ch" },
+            "& .MuiTextField-root": { m: 1, width: "30ch" },
           }}
           noValidate
           autoComplete="off"
         >
           <div className="text-center">
-          <h4 style={{ marginTop: "2%", paddingTop: "35px" }}>
-            ADD PRODUCT PAGE 
-          </h4>
+            <h4 style={{ marginTop: "2%", paddingTop: "35px" }}>
+              ADD PRODUCT PAGE
+            </h4>
           </div>
-          <div className="container ">
+          <div className="container">
             <div className="row col-lg-10 text-center">
               <div className="col-lg-4 col-md-6">
                 <TextField
@@ -432,7 +422,7 @@ export default function FormPropsTextFields() {
               <div className="col-lg-4 col-md-6">
                 <TextField
                   id="outlined-uncontrolled"
-                  label="Enter Product Price "
+                  label="Enter Product Price*"
                   {...register("price", {
                     required: "Please enter Product Price",
                   })}
@@ -444,7 +434,7 @@ export default function FormPropsTextFields() {
               <div className="col-lg-4 col-md-6">
                 <TextField
                   id="outlined-password-input"
-                  label="Enter Wholsaler Amount"
+                  label="Enter Wholsaler Amount*"
                   {...register("wholsalerPrice", {
                     required: "Please enter wholsalerPrice",
                   })}
@@ -467,7 +457,7 @@ export default function FormPropsTextFields() {
                 <TextField
                   id="outlined-select-currency"
                   select
-                  label="Rating"
+                  label="Rating*"
                   value={rating}
                   onChange={handleChange}
                 >
@@ -482,7 +472,7 @@ export default function FormPropsTextFields() {
                 <TextField
                   id="outlined-select-currency"
                   select
-                  label="Category"
+                  label="Category*"
                   value={Category}
                   onChange={ChangeCategory}
                 >
@@ -495,7 +485,7 @@ export default function FormPropsTextFields() {
               </div>
 
               <div className="col-lg-4 col-md-6">
-                <FormControl sx={{ m: 1, width: "35ch" }}>
+                <FormControl sx={{ m: 1, width: "30ch" }}>
                   <InputLabel id="demo-multiple-chip-label">Color</InputLabel>
                   <Select
                     labelId="demo-multiple-chip-label"
@@ -528,7 +518,7 @@ export default function FormPropsTextFields() {
                 </FormControl>
               </div>
               <div className="col-lg-4 col-md-6">
-                <FormControl sx={{ m: 1, width: "35ch" }}>
+                <FormControl sx={{ m: 1, width: "30ch" }}>
                   <InputLabel id="demo-multiple-chip-label">Size</InputLabel>
                   <Select
                     labelId="demo-multiple-chip-label"
@@ -562,7 +552,7 @@ export default function FormPropsTextFields() {
               </div>
               <div className="col-lg-4 col-md-6">
                 {/* add tage input field */}
-                <FormControl sx={{ m: 1, width: "35ch" }}>
+                <FormControl sx={{ m: 1, width: "30ch" }}>
                   <InputLabel id="demo-multiple-chip-label">Tag</InputLabel>
                   <Select
                     labelId="demo-multiple-chip-label"
@@ -622,14 +612,14 @@ export default function FormPropsTextFields() {
                 </TextField>
               </div>
               <div className="col-lg-4 col-md-6">
-                <FormControl sx={{ m: 1, width: "36ch" }}>
+                <FormControl sx={{ m: 1, width: "30ch" }}>
                   <i
                     onClick={PriductImageupload}
                     className="btn btn-primary  pt-3 pb-3"
                     variant="outlined"
                     color="primary"
                   >
-                    ULOAD PRODUCT IMAGE(min-3)
+                    ULOAD PRODUCT IMAGE(Min-2)
                   </i>
                 </FormControl>
               </div>

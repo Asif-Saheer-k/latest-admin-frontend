@@ -72,8 +72,8 @@ export default function FormPropsTextFields() {
       if (willDelete) {
         var myWidget = window.cloudinary.openUploadWidget(
           {
-            cloudName: "www-menscarts-shop",
-            uploadPreset: "dev_setups",
+            cloudName: "dq06v1dnz",
+            uploadPreset: "thepaaki",
           },
           async (error, result) => {
             if (!error && result && result.event === "success") {

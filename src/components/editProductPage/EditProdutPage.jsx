@@ -68,7 +68,14 @@ const names = [
   "purple",
   "powderblue",
 ];
-const tagsName = ["ladies", "jacket", "full sleve", "cloth", "sarie", "kurthi"];
+const tagsName = [
+  "ladies",
+  "jacket",
+  "full sleeve",
+  "cloth",
+  "sarie",
+  "kurthi",
+];
 
 const sizeChart = ["S", "M", "L", "XL", "XXL", "XXXL"];
 
@@ -110,8 +117,8 @@ const currencies = [
 ];
 const CategoryItems = [
   {
-    value: "Meternity outfits",
-    label: "Meternity outfits",
+    value: "Maternity outfits",
+    label: "Maternity outfits",
   },
   {
     value: "Casual Wears",
@@ -228,7 +235,7 @@ export default function FormPropsTextFields() {
       });
       setImage(ColorsImage[index]);
       var uniqueArray = Array.from(new Set(size));
-      setImage(ColorsImage[index])
+      setImage(ColorsImage[index]);
       ChangeSize({ edit: true, target: { value: uniqueArray } });
       ChangeColor({ edit: true, target: { value: color } });
       handleTag({ edit: true, target: { value: data.tag } });
@@ -266,8 +273,8 @@ export default function FormPropsTextFields() {
     console.log(Tag);
     var myWidget = window.cloudinary.openUploadWidget(
       {
-        cloudName: "www-menscarts-shop",
-        uploadPreset: "dev_setups",
+        cloudName: "dq06v1dnz",
+        uploadPreset: "thepaaki",
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
@@ -282,8 +289,8 @@ export default function FormPropsTextFields() {
   const PriductImageupload = () => {
     var myWidget = window.cloudinary.openUploadWidget(
       {
-        cloudName: "www-menscarts-shop",
-        uploadPreset: "dev_setups",
+        cloudName: "dq06v1dnz",
+        uploadPreset: "thepaaki",
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
@@ -369,10 +376,9 @@ export default function FormPropsTextFields() {
       varitaion.push(obj);
       setImage("");
       setStoke([]);
-      const inc=index+1
+      const inc = index + 1;
       setIndex(inc);
       setImage(ColorsImage[inc]);
-      console.log(ColorsImage[inc]);
     } else {
       swal("OOPS!", "Please Update Image!", "info");
     }
@@ -397,7 +403,7 @@ export default function FormPropsTextFields() {
             wholesaler: datas.wholsalerPrice,
             new: true,
             rating: rating,
-            saleCount: 54,
+            saleCount: 10,
             tag: Tag,
             category: [Category],
             variation: varitaion,
@@ -435,13 +441,13 @@ export default function FormPropsTextFields() {
           component="form"
           onSubmit={handleSubmit(onProduct)}
           sx={{
-            "& .MuiTextField-root": { m: 1, width: "35ch" },
+            "& .MuiTextField-root": { m: 1, width: "30ch" },
           }}
           noValidate
           autoComplete="off"
         >
           <div className="text-center">
-          <h4 style={{ marginTop: "2%" }}>EDIT PRODUCT PAGE</h4>
+            <h4 style={{ marginTop: "2%" }}>EDIT PRODUCT PAGE</h4>
           </div>
           <div className="container mt-3">
             <div className="row col-lg-10 text-center">
@@ -530,7 +536,7 @@ export default function FormPropsTextFields() {
               </div>
 
               <div className="col-lg-4 col-md-6">
-                <FormControl sx={{ m: 1, width: "35ch" }}>
+                <FormControl sx={{ m: 1, width: "30ch" }}>
                   <InputLabel id="demo-multiple-chip-label">Color</InputLabel>
                   <Select
                     labelId="demo-multiple-chip-label"
@@ -563,7 +569,7 @@ export default function FormPropsTextFields() {
                 </FormControl>
               </div>
               <div className="col-lg-4 col-md-6">
-                <FormControl sx={{ m: 1, width: "35ch" }}>
+                <FormControl sx={{ m: 1, width: "30ch" }}>
                   <InputLabel id="demo-multiple-chip-label">Size</InputLabel>
                   <Select
                     labelId="demo-multiple-chip-label"
@@ -597,7 +603,7 @@ export default function FormPropsTextFields() {
               </div>
               <div className="col-lg-4 col-md-6">
                 {/* add tage input field */}
-                <FormControl sx={{ m: 1, width: "35ch" }}>
+                <FormControl sx={{ m: 1, width: "30ch" }}>
                   <InputLabel id="demo-multiple-chip-label">Tag</InputLabel>
                   <Select
                     labelId="demo-multiple-chip-label"
@@ -658,7 +664,7 @@ export default function FormPropsTextFields() {
                 </TextField>
               </div>
               <div className="col-lg-4 col-md-6">
-                <FormControl sx={{ m: 1, width: "36ch" }}>
+                <FormControl sx={{ m: 1, width: "30ch" }}>
                   <i
                     onClick={PriductImageupload}
                     className="btn btn-primary  pt-3 pb-3"
