@@ -9,7 +9,10 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import AddressPdf from "./AddressPdf";
 import { useNavigate } from "react-router-dom";
+import { useReactToPrint } from "react-to-print";
+import { useRef } from "react";
 
 const style = {
   position: "absolute",
@@ -26,6 +29,7 @@ const style = {
 function SingleOrderPage({ invoice }) {
   const [TotalAmount, setTotalAmount] = useState(null);
   const [address, setAddress] = useState({});
+  const [fromaddress, setFromAddress] = useState({});
   const [produts, setProductDeatails] = useState([]);
   const [date, setDatate] = useState("");
   const [dispatchID, setDispatchID] = useState(null);
@@ -40,6 +44,7 @@ function SingleOrderPage({ invoice }) {
   const parms = useParams();
   const navigate = useNavigate();
   const OrderID = parms.id;
+  const componentRef = useRef();
   const AdminDeatails = useSelector((state) => state.admin.value);
   var Role;
   useEffect(() => {
@@ -58,6 +63,9 @@ function SingleOrderPage({ invoice }) {
             config
           );
           single = data;
+          if (!data.user) {
+            setFromAddress(data.FromAddress);
+          }
           const phone = data.Address.PhoneNumber;
           setPhone(phone);
           setDispatchButton(data.status);
@@ -146,13 +154,12 @@ function SingleOrderPage({ invoice }) {
   const downloadInvoice = async () => {
     let datas = [];
     produts.map((items) => {
-
       const obj = {
         description: items.name + "-" + items.color,
         quantity: items.quantity,
         price: items.price,
         "tax-rate": 0,
-        "tax":2
+        tax: 2,
       };
       datas.push(obj);
     });
@@ -203,7 +210,6 @@ function SingleOrderPage({ invoice }) {
         // Invoice data
         date: date,
         // Invoice due date
-        
       },
       // The products you would like to see on your invoice
       // Total values are being calculated automatically
@@ -262,7 +268,11 @@ function SingleOrderPage({ invoice }) {
     } catch (error) {
       swal("OOPS!", "Somthing Went Wrong!", "error");
     }
-  };
+  }; 
+  const downloadPdf = useReactToPrint({
+    content: () => componentRef.current, 
+    documentTitle: OrderID,
+  }); 
 
   return (
     <>
@@ -319,7 +329,6 @@ function SingleOrderPage({ invoice }) {
           </thead>
           <tbody>
             {produts.map((items, index) => {
-    
               return (
                 <tr key={index}>
                   <th>{items.ProductId}</th>
@@ -371,11 +380,15 @@ function SingleOrderPage({ invoice }) {
             </p>
           </div>
         </div>
-        <button className="float-end btn btn-primary" onClick={downloadInvoice}>
+        <button className="float-end btn btn-primary ms-4" onClick={downloadPdf}>
+          Download Pdf
+        </button>
+
+        <button className="float-end btn btn-primary " onClick={downloadInvoice}>
           Download Invoice
         </button>
       </Box>
-      <div class="text-center">
+      <div class="text-center mb-5">
         {dispatchButton == "Pending" && (
           <button
             className="float-center btn btn-danger mt-5"
@@ -385,6 +398,12 @@ function SingleOrderPage({ invoice }) {
           </button>
         )}
       </div>
+      
+      <AddressPdf
+        fromaddress={fromaddress}
+        company={componentRef}
+        useraddress={address}
+      />
     </>
   );
 }
