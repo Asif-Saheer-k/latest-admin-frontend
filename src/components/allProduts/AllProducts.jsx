@@ -86,6 +86,11 @@ function Alluser() {
       sortable: true,
     },
     {
+      name: "WHOLESALER PRICE",
+      selector: (row) => row.wholesaler,
+      sortable: true,
+    },
+    {
       name: "DISCOUNT",
       selector: (row) => row.discount,
       sortable: true,

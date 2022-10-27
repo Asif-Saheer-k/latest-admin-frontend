@@ -66,6 +66,11 @@ function AllOrder() {
       selector: (row) => row.Payment,
       sortable: true,
     },
+    // {
+    //   name: "COURIER SERVICE",
+    //   selector: (row) => row.Courier,
+    //   sortable: true,
+    // },
     {
       name: "DELIVERY TYPE",
       selector: (row) => row.DeliveryType,
