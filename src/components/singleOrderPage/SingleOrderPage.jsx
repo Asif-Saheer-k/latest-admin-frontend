@@ -40,6 +40,7 @@ function SingleOrderPage({ invoice }) {
   const handleClose = () => setOpen(false);
   const [dispatchButton, setDispatchButton] = useState("");
   const [phone, setPhone] = useState("");
+  const [hidden,setHidden]=useState(false)
 
   const parms = useParams();
   const navigate = useNavigate();

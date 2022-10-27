@@ -12,6 +12,23 @@ function AllOrder() {
   const AdminDeatails = useSelector((state) => state.admin.value);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
+  const ChangeOrderStatus = async (status, orderId) => {
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          "auth-token": AdminDeatails.Token,
+        },
+      };
+      const { data } = await axios.post(
+        "/api/superAdmin/Change-order-status",
+        { status, orderId },
+        config
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const columns = [
     {
@@ -30,8 +47,18 @@ function AllOrder() {
       sortable: true,
     },
     {
+      name: "U/W",
+      selector: (row) => row.role,
+      sortable: true,
+    },
+    {
       name: "AMOUNT",
       selector: (row) => row.Total,
+      sortable: true,
+    },
+    {
+      name: "DELIVERY CHARGE",
+      selector: (row) => row.DeliveyCharge,
       sortable: true,
     },
     {
@@ -40,20 +67,27 @@ function AllOrder() {
       sortable: true,
     },
     {
-      name: "OREDER STATUS",
-      selector: (row) => row.status,
-      sortable: true,
-    },
-    {
       name: "DELIVERY TYPE",
       selector: (row) => row.DeliveryType,
       sortable: true,
     },
     {
-      name: "DELIVERY CHARGE",
-      selector: (row) => row.DeliveyCharge,
+      name: "OREDER STATUS",
       sortable: true,
+      cell: (row) => (
+        <>
+          <select
+            onChange={(e) => {
+              ChangeOrderStatus(e.target.value, row.Id);
+            }}
+          >
+            <option>{row.status}</option>
+            <option value="Packed">Packed</option>
+          </select>
+        </>
+      ),
     },
+
     {
       name: "ORDER DEATAILS",
       sortable: true,
