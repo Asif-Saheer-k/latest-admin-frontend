@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import AddressPdf from "./AddressPdf";
 import { useNavigate } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
+import BarcodeReader from "react-barcode-reader";
 import { useRef } from "react";
 
 const style = {
@@ -40,7 +41,8 @@ function SingleOrderPage({ invoice }) {
   const handleClose = () => setOpen(false);
   const [dispatchButton, setDispatchButton] = useState("");
   const [phone, setPhone] = useState("");
-  const [hidden,setHidden]=useState(false)
+
+  const [barcodeInputValue, updateBarcodeInputValue] = useState("");
 
   const parms = useParams();
   const navigate = useNavigate();
@@ -269,11 +271,37 @@ function SingleOrderPage({ invoice }) {
     } catch (error) {
       swal("OOPS!", "Somthing Went Wrong!", "error");
     }
-  }; 
+  };
   const downloadPdf = useReactToPrint({
-    content: () => componentRef.current, 
+    content: () => componentRef.current,
     documentTitle: OrderID,
-  }); 
+  });
+  // function barcodeAutoFocus() {
+  //   document.getElementById("SearchbyScanning").focus()
+  // }
+
+  // function onChangeBarcode(event) {
+  //   updateBarcodeInputValue(event.target.value)
+  // }
+
+  // function onKeyPressBarcode(event) {
+  //   if (event.keyCode === 13) {
+  //     updateBarcodeInputValue(event.target.value)
+  //   }
+  // }
+  const handleScan = (data) => {
+   window.Dynamsoft.DBR.BarcodeReader.license = "DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ==";
+    let scanner = null;
+    (async()=>{
+        scanner = await window.Dynamsoft.DBR.BarcodeScanner.createInstance();
+        scanner.onFrameRead = results => {console.log(results,"KKKKKKKKKKKKK");};
+        scanner.onUnduplicatedRead = (txt, result) => {
+          
+        };
+        await scanner.show();
+    })();
+  };
+
 
   return (
     <>
@@ -306,6 +334,22 @@ function SingleOrderPage({ invoice }) {
                   setDispatchID(e.target.value);
                 }}
               ></input>
+              <div>
+                {/* <input
+                  autoFocus={true}
+                  placeholder='Start Scanning'
+                  value={barcodeInputValue}
+                  onChange={onChangeBarcode}
+                  id='SearchbyScanning'
+                  className='SearchInput'
+                  onKeyDown={onKeyPressBarcode}
+                  onBlur={barcodeAutoFocus}
+                /> */}
+                <div>
+                 
+                  {/* <p>{this.state.result}</p> */}
+                </div>
+              </div>
               <div class="text-center">
                 <button
                   className=" btn btn-primary mt-2"
@@ -369,37 +413,43 @@ function SingleOrderPage({ invoice }) {
             <b>TO:</b>
             <br />
             <p>
-              Name: {address?.Name}, Last Name: {address?.Lastname}
+              {address?.Name},{address?.Lastname}
               <br />
-              Address:{address?.StreetAddress}, Dist:{address?.TownCity},Pin:
-              {address?.Pincode}
+              {address?.StreetAddress},{address?.TownCity},{address?.Pincode}
               <br />
-              Email:{address?.Email}
+              {address?.Email}
               <br />
-              Phone:{address?.PhoneNumber},
+              {address?.PhoneNumber},
               {address?.message && <b>{address?.message}</b>}
             </p>
           </div>
         </div>
-        <button className="float-end btn btn-primary ms-4" onClick={downloadPdf}>
+        <button
+          className="float-end btn btn-primary ms-4"
+          onClick={downloadPdf}
+        >
           Download Pdf
         </button>
 
-        <button className="float-end btn btn-primary " onClick={downloadInvoice}>
+        <button
+          className="float-end btn btn-primary "
+          onClick={downloadInvoice}
+        >
           Download Invoice
         </button>
       </Box>
       <div class="text-center mb-5">
-        {dispatchButton == "Pending" && (
-          <button
-            className="float-center btn btn-danger mt-5"
-            onClick={handleOpen}
-          >
-            DISPATCH
-          </button>
-        )}
+        {dispatchButton == "Pending" ||
+          (dispatchButton == "Packed" && (
+            <button
+              className="float-center btn btn-danger mt-5"
+              onClick={handleScan}
+            >
+              DISPATCH
+            </button>
+          ))}
       </div>
-      
+
       <AddressPdf
         fromaddress={fromaddress}
         company={componentRef}
