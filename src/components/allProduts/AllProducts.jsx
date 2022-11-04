@@ -276,7 +276,7 @@ function Alluser() {
                       <td>
                         <img
                           src={items.image}
-                          style={{ width: "100px", height: "100px" }}
+                          style={{ width: "75px", height: "100px" }}
                         ></img>
                       </td>
                       <td>
