@@ -29,11 +29,11 @@ const style = {
 
 function SingleOrderPage({ invoice }) {
   const [TotalAmount, setTotalAmount] = useState(null);
+  const [singleOrder, setSingelOrder] = useState({});
   const [address, setAddress] = useState({});
   const [fromaddress, setFromAddress] = useState({});
   const [produts, setProductDeatails] = useState([]);
   const [date, setDatate] = useState("");
-  const [dispatchID, setDispatchID] = useState(null);
   const [offer, setOffer] = useState("");
   const [wallet, setWallet] = useState(null);
   const [open, setOpen] = React.useState(false);
@@ -41,7 +41,6 @@ function SingleOrderPage({ invoice }) {
   const handleClose = () => setOpen(false);
   const [dispatchButton, setDispatchButton] = useState("");
   const [phone, setPhone] = useState("");
-
   const [barcodeInputValue, updateBarcodeInputValue] = useState("");
 
   const parms = useParams();
@@ -65,6 +64,7 @@ function SingleOrderPage({ invoice }) {
             `/api/superAdmin/view-single-order/${parms.id}`,
             config
           );
+          setSingelOrder(data);
           single = data;
           if (!data.user) {
             setFromAddress(data.FromAddress);
@@ -254,54 +254,53 @@ function SingleOrderPage({ invoice }) {
   };
   //dispatch order function
   const dispatchOrder = async () => {
-    const DisPatchId = dispatchID;
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-          "auth-token": AdminDeatails.Token,
-        },
-      };
-      const { data } = await axios.post(
-        "/api/superAdmin/dispatch-order",
-        { DisPatchId, OrderID, phone },
-        config
-      );
-      navigate("/all-orders");
-    } catch (error) {
-      swal("OOPS!", "Somthing Went Wrong!", "error");
+    var link;
+    if (singleOrder.DeliveryType == "DTDC") {
+      link = "https://trackcourier.io/dtdc-tracking?";
+    } else {
+      link=""
     }
+    const TrackingId = barcodeInputValue;
+
+    console.log(phone, TrackingId);
+
+    
+
+    // try {
+    //   const config = {
+    //     headers: {
+    //       "Content-type": "application/json",
+    //       "auth-token": AdminDeatails.Token,
+    //     },
+    //   };
+    //   const { data } = await axios.post(
+    //     "/api/superAdmin/dispatch-order",
+    //     { DisPatchId, OrderID, phone },
+    //     config
+    //   );
+    //   navigate("/all-orders");
+    // } catch (error) {
+    //   swal("OOPS!", "Somthing Went Wrong!", "error");
+    // }
   };
   const downloadPdf = useReactToPrint({
     content: () => componentRef.current,
     documentTitle: OrderID,
   });
-  // function barcodeAutoFocus() {
-  //   document.getElementById("SearchbyScanning").focus()
-  // }
 
-  // function onChangeBarcode(event) {
-  //   updateBarcodeInputValue(event.target.value)
-  // }
+  function barcodeAutoFocus() {
+    document.getElementById("SearchbyScanning").focus();
+  }
 
-  // function onKeyPressBarcode(event) {
-  //   if (event.keyCode === 13) {
-  //     updateBarcodeInputValue(event.target.value)
-  //   }
-  // }
-  const handleScan = (data) => {
-   window.Dynamsoft.DBR.BarcodeReader.license = "DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ==";
-    let scanner = null;
-    (async()=>{
-        scanner = await window.Dynamsoft.DBR.BarcodeScanner.createInstance();
-        scanner.onFrameRead = results => {console.log(results,"KKKKKKKKKKKKK");};
-        scanner.onUnduplicatedRead = (txt, result) => {
-          
-        };
-        await scanner.show();
-    })();
-  };
+  function onChangeBarcode(event) {
+    updateBarcodeInputValue(event.target.value);
+  }
 
+  function onKeyPressBarcode(event) {
+    if (event.keyCode === 13) {
+      updateBarcodeInputValue(event.target.value);
+    }
+  }
 
   return (
     <>
@@ -327,29 +326,20 @@ function SingleOrderPage({ invoice }) {
           <Fade in={open}>
             <Box sx={style}>
               <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Tracking ID"
-                onChange={(e) => {
-                  setDispatchID(e.target.value);
-                }}
-              ></input>
-              <div>
-                {/* <input
-                  autoFocus={true}
-                  placeholder='Start Scanning'
-                  value={barcodeInputValue}
-                  onChange={onChangeBarcode}
-                  id='SearchbyScanning'
-                  className='SearchInput'
-                  onKeyDown={onKeyPressBarcode}
-                  onBlur={barcodeAutoFocus}
-                /> */}
-                <div>
-                 
-                  {/* <p>{this.state.result}</p> */}
-                </div>
-              </div>
+                autoFocus={true}
+                placeholder="Start Scanning"
+                value={barcodeInputValue}
+                onChange={onChangeBarcode}
+                id="SearchbyScanning"
+                className="SearchInput form-control"
+                onKeyDown={onKeyPressBarcode}
+                onBlur={barcodeAutoFocus}
+              />
+              <input
+                value={singleOrder.Courier}
+                className=" form-control mt-2"
+              />
+              <div>Type:{singleOrder.DeliveryType}</div>
               <div class="text-center">
                 <button
                   className=" btn btn-primary mt-2"
@@ -443,7 +433,7 @@ function SingleOrderPage({ invoice }) {
           (dispatchButton == "Packed" && (
             <button
               className="float-center btn btn-danger mt-5"
-              onClick={handleScan}
+              onClick={handleOpen}
             >
               DISPATCH
             </button>
