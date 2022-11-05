@@ -18,7 +18,7 @@ const Chart = ({ aspect, title }) => {
   const [Api, setApi] = useState([]);
   const [datas, setDatas] = useState([]);
   const [origina, setOriginal] = useState([]);
-
+  
   const totalMonth = [
     "January",
     "February",
@@ -47,6 +47,7 @@ const Chart = ({ aspect, title }) => {
           "/api/superAdmin/get-mothly-sales",
           config
         );
+        console.log(data);
         data.map((frist) => {
           //  const y=frist._id.getMonth()
           const month = new Date(frist._id).getMonth();
@@ -57,6 +58,7 @@ const Chart = ({ aspect, title }) => {
           };
           datas.push(obj);
         });
+       
 
         const rev = datas.reverse();
         setOriginal(rev);

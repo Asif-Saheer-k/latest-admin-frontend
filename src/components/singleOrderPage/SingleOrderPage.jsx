@@ -255,33 +255,31 @@ function SingleOrderPage({ invoice }) {
   //dispatch order function
   const dispatchOrder = async () => {
     var link;
-    if (singleOrder.DeliveryType == "DTDC") {
+    console.log();
+    const Courier = singleOrder.Courier;
+    if (Courier == "DTDC") {
       link = "https://trackcourier.io/dtdc-tracking?";
     } else {
-      link=""
+      link = "";
     }
     const TrackingId = barcodeInputValue;
 
-    console.log(phone, TrackingId);
-
-    
-
-    // try {
-    //   const config = {
-    //     headers: {
-    //       "Content-type": "application/json",
-    //       "auth-token": AdminDeatails.Token,
-    //     },
-    //   };
-    //   const { data } = await axios.post(
-    //     "/api/superAdmin/dispatch-order",
-    //     { DisPatchId, OrderID, phone },
-    //     config
-    //   );
-    //   navigate("/all-orders");
-    // } catch (error) {
-    //   swal("OOPS!", "Somthing Went Wrong!", "error");
-    // }
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          "auth-token": AdminDeatails.Token,
+        },
+      };
+      const { data } = await axios.post(
+        "/api/superAdmin/dispatch-order",
+        { TrackingId, OrderID, phone, link, Courier },
+        config
+      );
+      navigate("/all-orders");
+    } catch (error) {
+      swal("OOPS!", "Somthing Went Wrong!", "error");
+    }
   };
   const downloadPdf = useReactToPrint({
     content: () => componentRef.current,
@@ -376,7 +374,7 @@ function SingleOrderPage({ invoice }) {
                   <td>{items.color}</td>
                   <td>{items.size}</td>
                   <td>{items.quantity}</td>
-                  <td>{items.quantity + "x" + items.price}</td>
+                  <td>{items.quantity + "x" + items.price.toFixed(0)}</td>
                 </tr>
               );
             })}
@@ -414,6 +412,22 @@ function SingleOrderPage({ invoice }) {
             </p>
           </div>
         </div>
+        {dispatchButton == "Pending" && (
+          <button
+            className="float-end btn btn-danger ms-4"
+            onClick={handleOpen}
+          >
+            Dispatch
+          </button>
+        )}
+        {dispatchButton == "Packed" && (
+          <button
+            className="float-end btn btn-danger ms-4"
+            onClick={handleOpen}
+          >
+            Dispatch
+          </button>
+        )}
         <button
           className="float-end btn btn-primary ms-4"
           onClick={downloadPdf}
@@ -428,17 +442,7 @@ function SingleOrderPage({ invoice }) {
           Download Invoice
         </button>
       </Box>
-      <div class="text-center mb-5">
-        {dispatchButton == "Pending" ||
-          (dispatchButton == "Packed" && (
-            <button
-              className="float-center btn btn-danger mt-5"
-              onClick={handleOpen}
-            >
-              DISPATCH
-            </button>
-          ))}
-      </div>
+      <div class="text-center mb-5"></div>
 
       <AddressPdf
         fromaddress={fromaddress}
