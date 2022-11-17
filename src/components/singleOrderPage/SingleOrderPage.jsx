@@ -323,6 +323,7 @@ function SingleOrderPage({ invoice }) {
         >
           <Fade in={open}>
             <Box sx={style}>
+              <div className="text-center mb-3"><h4>Enter Details</h4></div>
               <input
                 autoFocus={true}
                 placeholder="Start Scanning"
@@ -333,11 +334,13 @@ function SingleOrderPage({ invoice }) {
                 onKeyDown={onKeyPressBarcode}
                 onBlur={barcodeAutoFocus}
               />
+              <label>Scan Tracking ID</label>
               <input
                 value={singleOrder.Courier}
                 className=" form-control mt-2"
               />
-              <div>Type:{singleOrder.DeliveryType}</div>
+                 <label>Service</label>
+           
               <div class="text-center">
                 <button
                   className=" btn btn-primary mt-2"

@@ -61,19 +61,14 @@ function AllOrder() {
       selector: (row) => row.DeliveyCharge,
       sortable: true,
     },
-    {
-      name: "PAYMENT STATUS",
-      selector: (row) => row.Payment,
-      sortable: true,
-    },
     // {
-    //   name: "COURIER SERVICE",
-    //   selector: (row) => row.Courier,
+    //   name: "PAYMENT STATUS",
+    //   selector: (row) => row.Payment,
     //   sortable: true,
     // },
     {
-      name: "DELIVERY TYPE",
-      selector: (row) => row.DeliveryType,
+      name: "COURIER SERVICE",
+      selector: (row) => row.Courier,
       sortable: true,
     },
     {
