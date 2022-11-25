@@ -619,7 +619,7 @@ export default function FormPropsTextFields() {
                     variant="outlined"
                     color="primary"
                   >
-                    UPLOAD PRODUCT IMAGE(Min-2)
+                    UPLOAD IMAGE(Min-2)(600x800)
                   </i>
                 </FormControl>
               </div>
@@ -628,7 +628,7 @@ export default function FormPropsTextFields() {
                   <div className="row ms-2">
                     {productImages.map((image, index) => {
                       return (
-                        <div className="col-md-2">
+                        <div className="col-md-3">
                           <img
                             src={image.url}
                             style={{ width: "200px", height: "250px" }}
@@ -669,7 +669,7 @@ export default function FormPropsTextFields() {
                         variant="outlined"
                         color="primary"
                       >
-                        UPLOAD IMAGE
+                        UPLOAD IMAGE(600x800)
                       </i>
 
                       {image && (

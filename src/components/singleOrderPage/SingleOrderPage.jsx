@@ -101,7 +101,9 @@ function SingleOrderPage({ invoice }) {
             var colorImage = null;
 
             data.variation.map((deatails) => {
-              if ((deatails.color = product.color)) {
+    
+              if ((deatails.color == product.color)) {
+             
                 colorImage = deatails.image;
               }
             });
@@ -323,7 +325,9 @@ function SingleOrderPage({ invoice }) {
         >
           <Fade in={open}>
             <Box sx={style}>
-              <div className="text-center mb-3"><h4>Enter Details</h4></div>
+              <div className="text-center mb-3">
+                <h4>Enter Details</h4>
+              </div>
               <input
                 autoFocus={true}
                 placeholder="Start Scanning"
@@ -339,8 +343,8 @@ function SingleOrderPage({ invoice }) {
                 value={singleOrder.Courier}
                 className=" form-control mt-2"
               />
-                 <label>Service</label>
-           
+              <label>Service</label>
+
               <div class="text-center">
                 <button
                   className=" btn btn-primary mt-2"
@@ -355,29 +359,29 @@ function SingleOrderPage({ invoice }) {
         <table className="table " s>
           <thead>
             <tr className="bg-warning">
-              <th scope="col">PRO_ID</th>
-              <th scope="col">IMAGE</th>
-              <th scope="col">COLOR</th>
-              <th scope="col">SIZE</th>
-              <th scope="col">QTY</th>
-              <th scope="col">PRICE</th>
+              <th style={{textAlign:"center"}} scope="col">PRO_ID</th>
+              <th style={{textAlign:"center"}} scope="col">IMAGE</th>
+              <th style={{textAlign:"center"}} scope="col">COLOR</th>
+              <th style={{textAlign:"center"}} scope="col">SIZE</th>
+              <th style={{textAlign:"center"}} scope="col">QTY</th>
+              <th style={{textAlign:"center"}} scope="col">PRICE</th>
             </tr>
           </thead>
           <tbody>
             {produts.map((items, index) => {
               return (
-                <tr key={index}>
-                  <th>{items.ProductId}</th>
+                <tr style={{textAlign:"center",verticalAlign:"center"}} key={index}>
+                  <th style={{textAlign:"center",verticalAlign:"middle"}}>{items.ProductId}</th>
                   <td>
                     <img
                       src={items.image}
-                      style={{ width: "150px", height: "150px" }}
+                      style={{ width: "150px", height: "200px" }}
                     ></img>
                   </td>
-                  <td>{items.color}</td>
-                  <td>{items.size}</td>
-                  <td>{items.quantity}</td>
-                  <td>{items.quantity + "x" + items.price.toFixed(0)}</td>
+                  <td style={{textAlign:"center",verticalAlign:"middle"}}>{items.color}</td>
+                  <td style={{textAlign:"center",verticalAlign:"middle"}}>{items.size}</td>
+                  <td style={{textAlign:"center",verticalAlign:"middle"}}>{items.quantity}</td>
+                  <td style={{textAlign:"center",verticalAlign:"middle"}}>{items.quantity + "x" + items.price.toFixed(0)}</td>
                 </tr>
               );
             })}
@@ -446,12 +450,13 @@ function SingleOrderPage({ invoice }) {
         </button>
       </Box>
       <div class="text-center mb-5"></div>
-
-      <AddressPdf
-        fromaddress={fromaddress}
-        company={componentRef}
-        useraddress={address}
-      />
+      <div  style={{marginTop:"100%"}}>
+        <AddressPdf
+          fromaddress={fromaddress}
+          company={componentRef}
+          useraddress={address}
+        />
+      </div>
     </>
   );
 }

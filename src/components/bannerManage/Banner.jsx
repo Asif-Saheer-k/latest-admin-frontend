@@ -185,7 +185,8 @@ export default function FormPropsTextFields() {
       onSubmit={handleSubmit(onSubmit)}
       sx={{
         "& .MuiTextField-root": { m: 1, width: "45ch" },
-        marginTop: "2%",overflow:"hidden"
+        marginTop: "2%",
+        overflow: "hidden",
       }}
       noValidate
       autoComplete="off"
@@ -247,7 +248,7 @@ export default function FormPropsTextFields() {
                   variant="outlined"
                   color="primary"
                 >
-                  UPLOAD IMAGE
+                  UPLOAD IMAGE(1920x800)
                 </i>
               </div>
               <div className="col-md-4 ">

@@ -252,7 +252,7 @@ export default function FormPropsTextFields() {
               variant="outlined"
               color="primary"
             >
-              UPLOAD IMAGE
+              UPLOAD IMAGE(570x525)
             </i>
           </div>
           <div className="col-lg-4 col-md-6">
@@ -280,58 +280,59 @@ export default function FormPropsTextFields() {
         <h4 style={{ marginTop: "5%" }}>DEAL DEATAILS</h4>
       </div>
       <div className="container-fluid">
-        <div className="row col-lg-10">
-          
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 100 }} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell align="center">S/No</StyledTableCell>
-                    <StyledTableCell align="left">PRO_ID</StyledTableCell>
-                    <StyledTableCell align="center">DATE</StyledTableCell>
-                    <StyledTableCell align="center">OFFER</StyledTableCell>
-                    <StyledTableCell align="center">IMAGE</StyledTableCell>
-                    <StyledTableCell align="center"></StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {Data.map((row, index) => (
-                    <StyledTableRow key={row._id}>
-                      <StyledTableCell align="center">
-                        {index + 1}
-                      </StyledTableCell>
-                      <StyledTableCell align="left">
-                        {row.PROID}
-                      </StyledTableCell>
-                      <StyledTableCell align="left">{row.date}</StyledTableCell>
-                      <StyledTableCell align="left">
-                        {row.OFFER}
-                      </StyledTableCell>
+        <div
+          className="row col-lg-10"
+          style={{
+            alignItems: "center",
+            width: "100%",
+            justifyContent: " center",
+          }}
+        >
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 100 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell align="center">S/No</StyledTableCell>
+                  <StyledTableCell align="center">PRO_ID</StyledTableCell>
+                  <StyledTableCell align="center">DATE</StyledTableCell>
+                  <StyledTableCell align="center">OFFER</StyledTableCell>
+                  <StyledTableCell align="center">IMAGE</StyledTableCell>
+                  <StyledTableCell align="center">ACTION</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Data.map((row, index) => (
+                  <StyledTableRow key={row._id}>
+                    <StyledTableCell align="center">
+                      {index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">{row.PROID}</StyledTableCell>
+                    <StyledTableCell align="left">{row.date}</StyledTableCell>
+                    <StyledTableCell align="left">{row.OFFER}</StyledTableCell>
 
-                      <StyledTableCell align="left">
-                        <img
-                          style={{ width: "200px", height: "150px" }}
-                          src={row.DealImage}
-                        ></img>
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        <DeleteIcon
-                          style={{
-                            fontSize: "18px",
-                            cursor: "pointer",
-                            color: "red",
-                          }}
-                          onClick={() => deleteDeal(row._id)}
-                        />
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </div>
+                    <StyledTableCell align="left">
+                      <img
+                        style={{ width: "200px", height: "150px" }}
+                        src={row.DealImage}
+                      ></img>
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      <DeleteIcon
+                        style={{
+                          fontSize: "18px",
+                          cursor: "pointer",
+                          color: "red",
+                        }}
+                        onClick={() => deleteDeal(row._id)}
+                      />
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
-
+      </div>
     </Box>
   );
 }

@@ -73,7 +73,8 @@ function Alluser() {
             "auth-token": AdminDeatails.Token,
           },
         };
-        const { data } = await axios.get("/api/admin/view-allusers", config);
+        const { data } = await axios.get("/api/superAdmin/viewAlluser", config);
+        console.log(data, "fslskjfksjf");
         setData(data);
       } catch (error) {
         swal("OOPS!", "Somthing Went Wrong!", "error");

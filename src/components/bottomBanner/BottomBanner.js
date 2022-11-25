@@ -112,7 +112,7 @@ export default function FormPropsTextFields() {
 
   return (
     <Box>
-      <h4 style={{ marginTop: "5%" }}>BOTTOM BANNER DEATAILS</h4>
+
       <div className="container">
         <div className="col-10">
           <TableContainer component={Paper}>
@@ -120,7 +120,7 @@ export default function FormPropsTextFields() {
               <TableHead>
                 <TableRow>
                   <StyledTableCell align="left">S/No</StyledTableCell>
-                  <StyledTableCell align="center">BANNER IMAGE</StyledTableCell>
+                  <StyledTableCell align="center">BANNER IMAGE(431x214)</StyledTableCell>
                   <StyledTableCell align="center">TITILE</StyledTableCell>
                   <StyledTableCell align="center"> </StyledTableCell>
                 </TableRow>
